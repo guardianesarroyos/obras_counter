@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Obra Inconclusa - Ruta 26</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --highlight-light: #cc0000;
+      --highlight-dark: #ff3c3c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Rubik Mono One', monospace;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('fondo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      color: white;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* Capa oscura */
+      z-index: 1;
+    }
+
+    .contenido {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      max-width: 90vw;
+    }
+
+    .encabezado {
+      font-size: 1.2rem;
+      font-weight: normal;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: #3f1f9c6;
+    }
+
+    .separador {
+      border: none;
+      height: 2px;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 25px auto;
+      background: #ff3c3c88;
+    }
+
+    .titulo {
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .reloj-container {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contador {
+      padding: 10px 15px;
+      border: 2px solid;
+      border-radius: 10px;
+      min-width: 90px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 15px #ff3c3c66;
+      color: var(--highlight-dark);
+    }
+
+    .unidad {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      color: #ccc;
+    }
+
+    .valor {
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .ubicacion {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .encabezado {
+        font-size: 1rem;
+      }
+      .titulo {
+        font-size: 1.2rem;
+      }
+      .valor {
+        font-size: 1.5rem;
+      }
+      .reloj-container {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="contenido">
+    <div class="encabezado">Efectos del ensanchamiento de Ruta 26 en 2025</div>
+    <hr class="separador" />
+
+    <div class="titulo">
+      <div>Vecinos indefensos ante</div>
+      <div>una obra mal hecha e inconclusa</div>
+    </div>
+
+    <div class="reloj-container">
+      <div class="contador">
+        <div class="unidad">Años</div>
+        <div class="valor" id="años">00</div>
+      </div>
+      <div class="contador">
+        <div class="unidad">Días</div>
+        <div class="valor" id="días">000</div>
+      </div>
+      <div class="contador">
+        <div class="unidad">Horas</div>
+        <div class="valor" id="horas">00</div>
+      </div>
+      <div class="contador">
+        <div class="unidad">Minutos</div>
+        <div class="valor" id="minutos">00</div>
+      </div>
+      <div class="contador">
+        <div class="unidad">Segundos</div>
+        <div class="valor" id="segundos">00</div>
+      </div>
+    </div>
+
+    <div class="ubicacion">📍 Arroyo Escobar · Ruta 26 y Ruta 9 · Ing. Maschwitz 🌧️</div>
+  </div>
+
+  <script>
+    const fechaInicio = new Date("2024-10-18T00:00:00Z");
+
+    function actualizarReloj() {
+      const ahora = new Date();
+      let diferencia = ahora - fechaInicio;
+
+      const segundosTotales = Math.floor(diferencia / 1000);
+      const años = Math.floor(segundosTotales / (365.25 * 24 * 3600));
+      const dias = Math.floor((segundosTotales % (365.25 * 24 * 3600)) / (24 * 3600));
+      const horas = Math.floor((segundosTotales % (24 * 3600)) / 3600);
+      const minutos = Math.floor((segundosTotales % 3600) / 60);
+      const segundos = segundosTotales % 60;
+
+      function pad(n, width) {
+        return n.toString().padStart(width, '0');
+      }
+
+      document.getElementById("años").textContent = pad(años, 2);
+      document.getElementById("días").textContent = pad(dias, 3);
+      document.getElementById("horas").textContent = pad(horas, 2);
+      document.getElementById("minutos").textContent = pad(minutos, 2);
+      document.getElementById("segundos").textContent = pad(segundos, 2);
+    }
+
+    actualizarReloj();
+    setInterval(actualizarReloj, 1000);
+  </script>
+</body>
+</html>
